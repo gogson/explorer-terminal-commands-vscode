@@ -1,0 +1,122 @@
+{
+	"name": "explorer-terminal-commands",
+	"displayName": "Explorer Terminal Commands",
+	"description": "Quick terminal commands from the explorer view",
+  "version": "0.0.1",
+  "icon": "resources/icon.png",
+  "publisher": "gogson",
+  "galleryBanner": {
+    "color": "#333333",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/gogson/explorer-terminal-commands-vscode/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/gogson/explorer-terminal-commands-vscode/issues",
+    "email": "me@hugolafitte.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gogson/explorer-terminal-commands-vscode.git"
+  },
+	"engines": {
+		"vscode": "^1.40.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "explorerTerminalCommands",
+          "name": "Terminal Quick Commands"
+        }
+      ]
+    },
+		"commands": [
+			{
+				"command": "explorerTerminalCommands.executeCommand",
+				"title": "Execute command"
+			}
+		]
+  },
+  "configuration": [
+    {
+      "title": "Explorer Terminal Command",
+      "properties": {
+        "explorerTerminal.commands": {
+          "type": "array",
+          "items": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "Command sent to the terminal"
+              },
+              "name": {
+                "type": "string",
+                "description": "Human-readable label to display in the explorer (default to the command name)"
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Working directory to create the terminal from (optional)"
+              },
+              "auto": {
+                "type": "boolean",
+                "description": "Auto-run the command after sent to the terminal (default: true)"
+              },
+              "multi": {
+                "type": "boolean",
+                "description": "Wether to create another terminal for the same command (default: false)"
+              }
+            }
+          },
+          "default": [
+            {
+              "command": "ls -laH",
+              "name": "Auto: List directory files"
+            },
+            {
+              "command": "date",
+              "name": "Auto: Display current time"
+            },
+            {
+              "command": "ls -laH ",
+              "auto": false
+            },
+            {
+              "name": "List /var directory",
+              "command": "ls -laH ",
+              "multi": true,
+              "cwd": "/var"
+            }
+          ]
+        }
+      }
+    }
+  ],
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.40.0",
+		"glob": "^7.1.5",
+		"mocha": "^6.2.2",
+		"typescript": "^3.6.4",
+		"tslint": "^5.20.0",
+		"vscode-test": "^1.2.2"
+	}
+}
