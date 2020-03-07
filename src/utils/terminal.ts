@@ -46,7 +46,7 @@ class TerminalFactory {
       this.disposeTerminal(options);
 
     let terminal = vscode.window.createTerminal(options);
-    this.terminals.push(terminal)
+    this.terminals.push(terminal);
     return terminal;
   }
 
@@ -69,7 +69,7 @@ class TerminalFactory {
   private disposeTerminal(options: vscode.TerminalOptions): Boolean {
     if (this.terminals.length === 0) return false;
 
-    let found = this.findTerminalIndex(options)
+    let found = this.findTerminalIndex(options);
     if (found === -1 || !this.terminals[found])
       return false;
 
@@ -79,5 +79,5 @@ class TerminalFactory {
   }
 }
 
-let terminalFactory = TerminalFactory.getInstance()
-export { terminalFactory }
+let terminalFactory = TerminalFactory.getInstance();
+export { terminalFactory };

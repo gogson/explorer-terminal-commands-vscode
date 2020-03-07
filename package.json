@@ -1,8 +1,8 @@
 {
 	"name": "explorer-terminal-commands",
 	"displayName": "Explorer Terminal Commands",
-	"description": "Quick terminal commands from the explorer view",
-  "version": "0.0.1",
+	"description": "Quick terminal & docker-compose commands from the explorer view",
+  "version": "1.0.0",
   "icon": "resources/icon.png",
   "publisher": "gogson",
   "galleryBanner": {
@@ -34,20 +34,56 @@
         {
           "id": "explorerTerminalCommands",
           "name": "Terminal Quick Commands"
-        }
+        },
+        {
+          "id": "composeTerminalCommands",
+          "name": "Compose Quick Commands",
+          "when": "config.explorerTerminal.showDockerCommands == true"
+        }        
       ]
     },
 		"commands": [
 			{
 				"command": "explorerTerminalCommands.executeCommand",
 				"title": "Execute command"
-			}
-		]
+      },
+      {
+        "command": "explorerTerminalCommands.refreshCommands",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "explorerTerminalCommands.refreshCommands",
+          "when": "view == explorerTerminalCommands || view == composeTerminalCommands",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "configuration": [
     {
       "title": "Explorer Terminal Command",
+      "type": "object",
       "properties": {
+        "explorerTerminal.showDockerCommands": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Docker Quick commands panel"
+        },
+        "explorerTerminal.composeFileNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["docker-compose.yml"],
+          "description": "Override Docker Compose project name for each workspace root."
+        },
         "explorerTerminal.commands": {
           "type": "array",
           "items": {

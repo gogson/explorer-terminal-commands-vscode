@@ -4,8 +4,13 @@ This VSCode extension allows you to define a set of terminal commands in your wo
 
 ![Extension demo](/demo.gif?raw=true "Extension demo")
 
+## Docker Compose panel
 
-## Features
+Plugin will search for docker-compose.yml files in all your workspaces folder, and display quick Docker Compose commands for the entire stack, and each services. This is disabled by default. Set `showDockerCommands` to true to enable it.
+
+![Extension demo](/demo-compose.png?raw=true "Docker panel demodemo")
+
+## Custom commands Features
 
 * Auto on/off : wether to run the command immediately or let you finish typing it
 * Custom working directory : allow you to set the CWD of the terminal before sending the command
@@ -16,6 +21,7 @@ This VSCode extension allows you to define a set of terminal commands in your wo
 Commands must be set in your workspace settings.
 
 ```
+  "explorerTerminal.showDockerCommands": true,
   "explorerTerminal.commands": [
     {
       "command": "top",
